@@ -63,7 +63,7 @@ def get_past_match_report_squads_and_urls(scores_table):
     return fixtures_dict
 
 
-def access_fbref(driver, match_url):
+def access_fbref(driver, match_url, home, away):
     match_page = driver.get(match_url)
     time.sleep(9)
     match_source = driver.page_source
@@ -81,8 +81,12 @@ def main():
     driver = set_up_webdriver()
     scores_and_fixtures = get_scores_and_fixtures_table(driver)
     match_dict = get_past_match_report_squads_and_urls(scores_and_fixtures)
-    # match_source = access_fbref(driver)
-    # read_match_data(match_source)
+
+    for item in match_dict.items():
+        home_team = item[1]['home']
+        away_team = item[1]['away']
+        url = "https://fbref.com" + item[1]['url']
+        match_source = access_fbref(driver, url, home_team, away_team)
 
 if __name__ == '__main__':
     main()

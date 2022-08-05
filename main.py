@@ -27,7 +27,18 @@ def get_scores_and_fixtures_table(driver):
 
     return scores_table
 
-    return match_source
+def get_past_match_report_urls(scores_table):
+    scores_table_head = scores_table.find('thead')
+    scores_table_body = scores_table.find('tbody')
+    
+    cols = scores_table_head.find_all('th')
+    fixtures = scores_table_body.find_all('tr')
+    col_names = []
+
+    for col in cols:
+        col_names.append(col.get_text())
+
+    print(col_names)
 
 
 def read_match_data(match_source):
@@ -39,6 +50,7 @@ def main():
     print("main!")
     driver = set_up_webdriver()
     scores_and_fixtures = get_scores_and_fixtures_table(driver)
+    get_past_match_report_urls(scores_and_fixtures)
     # match_source = access_fbref(driver)
 
 if __name__ == '__main__':

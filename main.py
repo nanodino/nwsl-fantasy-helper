@@ -17,10 +17,13 @@ def set_up_webdriver():
 
     return driver
 
-def access_fbref(driver, match_url):
-    match_page = driver.get(match_url)
-    time.sleep(9)
-    match_source = driver.page_source
+def get_list_of_match_report_urls(driver):
+    scores_and_fixtures_url = "https://fbref.com/en/comps/182/schedule/NWSL-Scores-and-Fixtures#sched_11498_1"
+    scores_and_fixtures_page = driver.get(scores_and_fixtures_url)
+    time.sleep(3)
+    scores_and_fixtures_source = driver.page_source
+
+    print(scores_and_fixtures_source)
 
     return match_source
 

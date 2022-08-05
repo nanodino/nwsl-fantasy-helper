@@ -22,6 +22,8 @@ def get_list_of_match_report_urls(driver):
     scores_and_fixtures_page = driver.get(scores_and_fixtures_url)
     time.sleep(3)
     scores_and_fixtures_source = driver.page_source
+    scores_soup = BeautifulSoup(scores_and_fixtures_source, features="html.parser")
+    scores_table = scores_soup.find("table", {"id": "sched_11498_1"})
 
     print(scores_and_fixtures_source)
 

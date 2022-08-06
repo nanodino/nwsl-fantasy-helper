@@ -60,7 +60,7 @@ def get_past_match_report_squads_and_urls(scores_table):
     return fixtures_dict
 
 
-def access_fbref(driver, match_url, home, away):
+def access_fbref_boxscore(driver, match_url, home, away):
     match_page = driver.get(match_url)
     time.sleep(9)
     match_source = driver.page_source

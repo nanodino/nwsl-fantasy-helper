@@ -10,7 +10,7 @@ def main():
         home_team = item[1]['home']
         away_team = item[1]['away']
         url = "https://fbref.com" + item[1]['url']
-        match_source = scraper.access_fbref_boxscore(driver, url, home_team, away_team)
+        home_team_html_table, home_keeper_html_table, away_keeper_html_table = scraper.access_fbref_boxscore(driver, url, home_team, away_team)
 
 if __name__ == '__main__':
     main()

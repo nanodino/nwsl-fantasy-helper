@@ -65,8 +65,8 @@ def access_fbref_boxscore(driver, match_url, home, away):
     time.sleep(9)
     match_source = driver.page_source
     match_soup = BeautifulSoup(match_source, features="html.parser")
-    team_tables = match_soup.find_all("table", id=lambda x: x and x.startswith("all_player_stats"))
-    keeper_tables = match_soup.find_all("table", id=lambda x: x and x.startswith("all_keeper_stats"))
+    team_tables = match_soup.find_all("div", id=lambda x: x and x.startswith("all_player_stats"))
+    keeper_tables = match_soup.find_all("div", id=lambda x: x and x.startswith("all_keeper_stats"))
 
 
     return match_source

@@ -20,7 +20,7 @@ def get_scores_and_fixtures_table(driver):
     time.sleep(3)
     scores_and_fixtures_source = driver.page_source
     scores_soup = BeautifulSoup(scores_and_fixtures_source, features="html.parser")
-    scores_table = scores_soup.find("table", {"id": "sched_11498_1"})
+    scores_table = scores_soup.find("table", {"id": "sched_2022_182_1"})
     
     return scores_table
 
@@ -46,8 +46,8 @@ def get_past_match_report_squads_and_urls(scores_table):
         if is_past_match == 1:
             try:
                 match_url = match_report_cell.contents[0].attrs['href'] 
-                home_team = fixture.find("td", {"data-stat": "squad_a"}).get_text()
-                away_team = fixture.find("td", {"data-stat": "squad_b"}).get_text()
+                home_team = fixture.find("td", {"data-stat": "home_team"}).get_text()
+                away_team = fixture.find("td", {"data-stat": "away_team"}).get_text()
 
                 fixtures_dict[counter] = {}
                 fixtures_dict[counter]["home"] = home_team
@@ -64,6 +64,10 @@ def access_fbref_boxscore(driver, match_url, home, away):
     match_page = driver.get(match_url)
     time.sleep(9)
     match_source = driver.page_source
+    match_soup = BeautifulSoup(match_source, features="html.parser")
+    team_tables = match_soup.find_all("table", id=lambda x: x and x.startswith("all_player_stats"))
+    keeper_tables = match_soup.find_all("table", id=lambda x: x and x.startswith("all_keeper_stats"))
+
 
     return match_source
 

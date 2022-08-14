@@ -68,8 +68,12 @@ def access_fbref_boxscore(driver, match_url, home, away):
     team_tables = match_soup.find_all("div", id=lambda x: x and x.startswith("all_player_stats"))
     keeper_tables = match_soup.find_all("div", id=lambda x: x and x.startswith("all_keeper_stats"))
 
+    home_team_html_table = team_tables[0].find("table")
+    away_team_html_table = team_tables[1].find("table")
+    home_keeper_html_table = keeper_tables[0].find("table")
+    away_keeper_html_table = keeper_tables[1].find("table")
 
-    return match_source
+    return home_team_html_table, home_keeper_html_table, away_team_html_table, away_keeper_html_table
 
 
 def read_match_data(match_source):

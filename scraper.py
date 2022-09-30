@@ -15,14 +15,13 @@ def set_up_webdriver():
     return driver
 
 def get_scores_and_fixtures_table(driver):
-    scores_and_fixtures_url = "https://fbref.com/en/comps/182/schedule/NWSL-Scores-and-Fixtures#sched_11498_1"
-    scores_and_fixtures_page = driver.get(scores_and_fixtures_url)
-    time.sleep(3)
-    scores_and_fixtures_source = driver.page_source
-    scores_soup = BeautifulSoup(scores_and_fixtures_source, features="html.parser")
-    scores_table = scores_soup.find("table", {"id": "sched_2022_182_1"})
-    
-    return scores_table
+    i = 0
+    in_error = 0
+    while(in_error == 0):
+        scores_and_fixtures_url = "https://www.fotmob.com/leagues/9134/matches/nwsl/by-date?page={}".format(i)
+        i += 1
+
+    return driver  #temp return
 
 def get_past_match_report_squads_and_urls(scores_table):
     scores_table_head = scores_table.find('thead')
